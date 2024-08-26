@@ -99,28 +99,33 @@ const SiderbarSheet = () => {
 
       <div className="flex flex-col gap-4 border-b border-solid py-5">
         {quickSearchOptions.map((option) => (
-          <Button
+          <SheetClose key={option.title} asChild>
+            <Button
             key={option.title}
             className="justify-start gap-2"
             variant="ghost"
-          >
-            <Image
-              src={option.imageUrl}
-              height={18}
-              width={18}
-              alt={option.title}
-            />
-            {option.title}
-          </Button>
+            asChild
+            >
+              <Link href={`/barbershops?service=${option.title}`}>
+                <Image
+                  src={option.imageUrl}
+                  height={18}
+                  width={18}
+                  alt={option.title}
+                />
+                {option.title}
+              </Link>
+            </Button>
+          </SheetClose>
         ))}
-        <Button className="justify-start gap-2" variant="ghost">
+        {/* <Button className="justify-start gap-2" variant="ghost">
           <HomeIcon size={18} />
           Início
         </Button>
         <Button className="justify-start gap-2" variant="ghost">
           <CalendarIcon size={18} />
           Agendamentos
-        </Button>
+        </Button> */}
       </div>
 
       <div className="flex flex-col gap-4 py-5">
@@ -138,3 +143,5 @@ const SiderbarSheet = () => {
 }
 
 export default SiderbarSheet
+
+
