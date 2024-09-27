@@ -50,6 +50,7 @@ const getTimeList = (bookings: Booking[]) => {
     const hour = Number(time.split(':')[0])
     const minutes = Number(time.split(':')[1])
 
+
     const hasBookingOnCurrentTime = bookings.some(
       (booking) => 
         booking.date.getHours() === hour && 
@@ -121,7 +122,7 @@ const ServiceItem = ({ service, barbershop}: ServiceItemProps) => {
       handleBookingSheetOpenChange()
       toast.success("Reserva criada com sucesso!")
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       toast.error("Erro ao criar reserva!")
     }
   }
