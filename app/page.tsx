@@ -9,6 +9,8 @@ import Search from "./_components/search"
 import Link from 'next/link'
 import { getServerSession } from 'next-auth'
 import { authOptions } from './_lib/auth'
+import { ptBR } from 'date-fns/locale'
+import { format } from 'date-fns'
 
 //TODO: receber agendamento como prop
 const Home = async () => {
@@ -47,8 +49,18 @@ const Home = async () => {
       <Header />
       <div className="p-5">
         {/* Texto */}
-        <h2 className="text-xl font-bold">Olá, Sergio!</h2>
-        <p>Sexta-feira, 09 de agosto</p>
+        <h2 className="text-xl font-bold">
+          Olá, {session?.user ? session.user.name : "bem vindo"}
+        </h2>
+        <p>
+          <span className='capitalize'>
+            {format(new Date(), "EEEE, dd", {locale: ptBR,})}
+          </span>
+          <span>&nbsp;de&nbsp;</span>
+          <span className='capitalize'>
+            {format(new Date(), "MMMM", {locale: ptBR,})}
+          </span>
+        </p>
 
         {/* Busca */}
         <div className="mt-6">
