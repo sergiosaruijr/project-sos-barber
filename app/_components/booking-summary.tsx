@@ -1,8 +1,8 @@
 // import { Card, CardContent } from './ui/card';
 
-interface BookingSummaryProps {
+// interface BookingSummaryProps {
 
-}
+// }
 
 const BookingSummary = () => {
   return ( 
