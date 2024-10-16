@@ -128,7 +128,6 @@ const ServiceItem = ({ service, barbershop}: ServiceItemProps) => {
     try {
       if (!selectedDate) return;
     
-    
       await createBooking({
         serviceId: service.id,
         date: selectedDate,
@@ -189,7 +188,7 @@ const ServiceItem = ({ service, barbershop}: ServiceItemProps) => {
                     Reservar
                   </Button>
         
-                <SheetContent className='px-0'>
+                <SheetContent className='px-0 overflow-auto'>
                   <SheetHeader>
                     <SheetTitle>Fazer Reserva</SheetTitle>
                   </SheetHeader>
