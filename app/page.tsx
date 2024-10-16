@@ -11,6 +11,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from './_lib/auth'
 import { ptBR } from 'date-fns/locale'
 import { format } from 'date-fns'
+import { getConfirmedBookings } from './_data/get-confirmed-bookings'
 
 //TODO: receber agendamento como prop
 const Home = async () => {
@@ -22,26 +23,7 @@ const Home = async () => {
     },
   })
 
-  const confirmedBookings = session?.user 
-    ? await db.booking.findMany({
-      where: {
-        userId: (session?.user as any).id,
-        date: {
-          gte: new Date()
-        }
-      },
-      include: {
-        service: {
-          include: {
-            barbershop: true
-          },
-        },
-      },
-      orderBy: {
-        date: 'asc'
-      }
-    })
-  : []
+  const confirmedBookings = await getConfirmedBookings()
 
   return (
     <div>
