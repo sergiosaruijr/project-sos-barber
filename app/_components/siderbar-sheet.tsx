@@ -6,14 +6,10 @@ import { SheetClose, SheetContent, SheetHeader, SheetTitle } from "./ui/sheet"
 import { quickSearchOptions } from "../_constants/search"
 import Link from "next/link"
 import Image from "next/image"
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "./ui/dialog"
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog"
 import { signOut, useSession } from "next-auth/react"
 import { Avatar, AvatarImage } from "./ui/avatar"
-import SignInDialog from './sign-in-dialog'
+import SignInDialog from "./sign-in-dialog"
 
 const SiderbarSheet = () => {
   const { data } = useSession()
@@ -68,7 +64,7 @@ const SiderbarSheet = () => {
           </Button>
         </SheetClose>
         <Button className="justify-start gap-2" variant="ghost" asChild>
-          <Link href='/bookings'>
+          <Link href="/bookings">
             <CalendarIcon size={18} />
             Agendamentos
           </Link>
@@ -79,10 +75,10 @@ const SiderbarSheet = () => {
         {quickSearchOptions.map((option) => (
           <SheetClose key={option.title} asChild>
             <Button
-            key={option.title}
-            className="justify-start gap-2"
-            variant="ghost"
-            asChild
+              key={option.title}
+              className="justify-start gap-2"
+              variant="ghost"
+              asChild
             >
               <Link href={`/barbershops?service=${option.title}`}>
                 <Image
@@ -123,5 +119,3 @@ const SiderbarSheet = () => {
 }
 
 export default SiderbarSheet
-
-

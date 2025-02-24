@@ -1,16 +1,17 @@
-import { DialogDescription, DialogTitle } from '@radix-ui/react-dialog';
-import { DialogHeader } from './ui/dialog';
-import { Button } from './ui/button';
-import { signIn } from 'next-auth/react';
-import Image from 'next/image'
+"use client"
+
+import { DialogDescription, DialogHeader, DialogTitle } from "./ui/dialog"
+import { Button } from "./ui/button"
+import { signIn } from "next-auth/react"
+import Image from "next/image"
 
 const SignInDialog = () => {
   const handleLoginWithGoogleClick = () => signIn("google")
-  
-  return ( 
+
+  return (
     <>
       <DialogHeader>
-        <DialogTitle>Faça seu login na plataforma</DialogTitle>
+        <DialogTitle className="">Faça seu login na plataforma</DialogTitle>
         <DialogDescription>
           Conecte-se usando sua conta do Google.
         </DialogDescription>
@@ -30,7 +31,7 @@ const SignInDialog = () => {
         Google
       </Button>
     </>
-  );
+  )
 }
- 
-export default SignInDialog;
+
+export default SignInDialog

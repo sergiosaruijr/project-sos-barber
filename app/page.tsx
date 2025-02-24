@@ -6,12 +6,12 @@ import BarbershopItem from "./_components/barbershop-item"
 import { quickSearchOptions } from "./_constants/search"
 import BookingItem from "./_components/booking-item"
 import Search from "./_components/search"
-import Link from 'next/link'
-import { getServerSession } from 'next-auth'
-import { authOptions } from './_lib/auth'
-import { ptBR } from 'date-fns/locale'
-import { format } from 'date-fns'
-import { getConfirmedBookings } from './_data/get-confirmed-bookings'
+import Link from "next/link"
+import { getServerSession } from "next-auth"
+import { authOptions } from "./_lib/auth"
+import { ptBR } from "date-fns/locale"
+import { format } from "date-fns"
+import { getConfirmedBookings } from "./_data/get-confirmed-bookings"
 
 //TODO: receber agendamento como prop
 const Home = async () => {
@@ -35,12 +35,12 @@ const Home = async () => {
           Olá, {session?.user ? session.user.name : "bem vindo"}
         </h2>
         <p>
-          <span className='capitalize'>
-            {format(new Date(), "EEEE, dd", {locale: ptBR,})}
+          <span className="capitalize">
+            {format(new Date(), "EEEE, dd", { locale: ptBR })}
           </span>
           <span>&nbsp;de&nbsp;</span>
-          <span className='capitalize'>
-            {format(new Date(), "MMMM", {locale: ptBR,})}
+          <span className="capitalize">
+            {format(new Date(), "MMMM", { locale: ptBR })}
           </span>
         </p>
 
@@ -52,10 +52,10 @@ const Home = async () => {
         {/* Busca Rapida */}
         <div className="mt-6 flex gap-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
           {quickSearchOptions.map((option) => (
-            <Button 
-              className="gap-2" 
-              variant="secondary" 
-              key={option.title} 
+            <Button
+              className="gap-2"
+              variant="secondary"
+              key={option.title}
               asChild
             >
               <Link href={`/barbershops?service=${option.title}`}>
@@ -72,7 +72,7 @@ const Home = async () => {
         </div>
 
         {/* Imagem */}
-        <div className="relative mt-6 h-[150px] w-full">
+        <div className="relative mt-6 h-[150px] w-full md:hidden">
           <Image
             src="/banner01.svg"
             alt="Agende nos melhores com SOS Barber"
@@ -87,13 +87,13 @@ const Home = async () => {
             <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
               Agendamentos
             </h2>
-            
-            <div className='flex overflow-x-auto gap-3 [&::-webkit-scrollbar]:hidden'>
+
+            <div className="flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
               {confirmedBookings.map((booking) => (
-                  <BookingItem 
-                    key={booking.id} 
-                    booking={JSON.parse(JSON.stringify(booking))}  
-                  />
+                <BookingItem
+                  key={booking.id}
+                  booking={JSON.parse(JSON.stringify(booking))}
+                />
               ))}
             </div>
           </>
@@ -122,5 +122,3 @@ const Home = async () => {
 }
 
 export default Home
-
-
