@@ -47,3 +47,9 @@
     @apply h-full bg-background text-foreground;
   }
 }
+
+@media (max-width: 1027px) {
+  .force-col {
+    flex-direction: column !important;
+  }
+}

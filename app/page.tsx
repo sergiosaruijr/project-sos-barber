@@ -30,74 +30,90 @@ const Home = async () => {
       {/* Header */}
       <Header />
       <div className="p-5">
-        {/* Texto */}
-        <h2 className="text-xl font-bold">
-          Olá, {session?.user ? session.user.name : "bem vindo"}
-        </h2>
-        <p>
-          <span className="capitalize">
-            {format(new Date(), "EEEE, dd", { locale: ptBR })}
-          </span>
-          <span>&nbsp;de&nbsp;</span>
-          <span className="capitalize">
-            {format(new Date(), "MMMM", { locale: ptBR })}
-          </span>
-        </p>
-
-        {/* Busca */}
-        <div className="mt-6">
-          <Search />
-        </div>
-
-        {/* Busca Rapida */}
-        <div className="mt-6 flex gap-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
-          {quickSearchOptions.map((option) => (
-            <Button
-              className="gap-2"
-              variant="secondary"
-              key={option.title}
-              asChild
-            >
-              <Link href={`/barbershops?service=${option.title}`}>
-                <Image
-                  src={option.imageUrl}
-                  width={16}
-                  height={16}
-                  alt={option.title}
-                />
-                {option.title}
-              </Link>
-            </Button>
-          ))}
-        </div>
-
-        {/* Imagem */}
-        <div className="relative mt-6 h-[150px] w-full md:hidden">
-          <Image
-            src="/banner01.svg"
-            alt="Agende nos melhores com SOS Barber"
-            fill
-            className="rounded-xl object-cover"
-          />
-        </div>
-
-        {/* Agendamento */}
-        {confirmedBookings.length > 0 && (
-          <>
-            <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
-              Agendamentos
+        {/* Div com imagem de fundo */}
+        <div className="-mx-5 gap-8 p-8 md:flex md:bg-black">
+          {/* Div lado esquerdo */}
+          <div className="flex flex-[1] flex-col justify-between">
+            <h2 className="text-xl font-bold">
+              Olá, {session?.user ? session.user.name : "bem vindo"}
             </h2>
+            <p className="text-white md:-mt-8">
+              {format(new Date(), "EEEE, dd 'de' MMMM", { locale: ptBR })}
+            </p>
 
-            <div className="flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
-              {confirmedBookings.map((booking) => (
-                <BookingItem
-                  key={booking.id}
-                  booking={JSON.parse(JSON.stringify(booking))}
-                />
+            {/* Busca */}
+            <div className="mt-6">
+              <Search />
+            </div>
+
+            {/* Busca Rapida */}
+            <div className="mt-6 flex gap-3 overflow-x-scroll md:hidden [&::-webkit-scrollbar]:hidden">
+              {quickSearchOptions.map((option) => (
+                <Button
+                  className="gap-2"
+                  variant="secondary"
+                  key={option.title}
+                  asChild
+                >
+                  <Link href={`/barbershops?service=${option.title}`}>
+                    <Image
+                      src={option.imageUrl}
+                      width={16}
+                      height={16}
+                      alt={option.title}
+                    />
+                    {option.title}
+                  </Link>
+                </Button>
               ))}
             </div>
-          </>
-        )}
+
+            {/* Imagem */}
+            <div className="relative mt-6 h-[150px] w-full md:hidden">
+              <Image
+                src="/banner01.svg"
+                alt="Agende nos melhores com SOS Barber"
+                fill
+                className="rounded-xl object-cover"
+              />
+            </div>
+
+            {/* Agendamento confirmados*/}
+            {confirmedBookings.length > 0 && (
+              <>
+                <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400 md:-mb-3 md:block">
+                  Agendamentos
+                </h2>
+
+                <div className="flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+                  {confirmedBookings.map((booking) => (
+                    <BookingItem
+                      key={booking.id}
+                      booking={JSON.parse(JSON.stringify(booking))}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+
+          {/* Lado Direito (Carrossel) */}
+          <div className="relative hidden flex-[2] overflow-hidden md:block">
+            <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
+              Recomendados
+            </h2>
+            <div className="scrollbar-hide flex gap-4 overflow-x-auto">
+              {barbershops.map((barbershop) => (
+                <BarbershopItem key={barbershop.id} barbershop={barbershop} />
+              ))}
+            </div>
+
+            {/* Botão de Navegação */}
+            <button className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2">
+              ➡️
+            </button>
+          </div>
+        </div>
 
         <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
           Recomendados

@@ -63,17 +63,19 @@ const Header = () => {
 
                 <div
                   onClick={openLogoutModal}
-                  className="flex cursor-pointer items-center gap-1.5 hover:text-gray-400"
+                  className="flex cursor-pointer items-center gap-2 hover:text-gray-400"
                 >
-                  {/* Avatar redondo com imagem do usuário */}
-                  <Avatar>
-                    <AvatarImage
-                      src={session.user.image ?? "/default-avatar.png"}
-                      width={40}
-                      height={40}
-                    />
-                    <AvatarFallback>U</AvatarFallback>
-                  </Avatar>
+                  <div className="rounded-full bg-gray-800 p-1">
+                    {/* Avatar redondo com imagem do usuário */}
+                    <Avatar>
+                      <AvatarImage
+                        src={session.user.image ?? "/default-avatar.png"}
+                        width={40}
+                        height={40}
+                      />
+                      <AvatarFallback>U</AvatarFallback>
+                    </Avatar>
+                  </div>
                   <span>{session.user.name}</span>
                 </div>
               </div>
