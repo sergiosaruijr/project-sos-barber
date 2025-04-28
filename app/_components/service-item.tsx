@@ -21,12 +21,12 @@ import { toast } from "sonner"
 import { getBookings } from "../_actions/get-bookings"
 import SignInDialog from "./sign-in-dialog"
 import { Dialog, DialogContent } from "./ui/dialog"
-import BookingSummary from "./booking-summary"
+// import BookingSummary from "./booking-summary"
 import { useRouter } from "next/navigation"
-
+import { BookingSummary } from "../_components/bookings/index"
 interface ServiceItemProps {
   service: BarbershopService
-  barbershop: Pick<Barbershop, "name">
+  barbershop: Pick<Barbershop, "name" | "address">
 }
 
 const TIME_LIST = [
@@ -274,7 +274,10 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                     <div className="p-5">
                       <BookingSummary
                         barbershop={barbershop}
-                        service={service}
+                        service={{
+                          ...service,
+                          price: service.price.toString(), // Conversão explícita
+                        }}
                         selectedDate={selectedDate}
                       />
                     </div>

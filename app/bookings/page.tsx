@@ -1,59 +1,45 @@
-import { getServerSession } from 'next-auth';
-import Header from '../_components/header';
-import { authOptions } from '../_lib/auth';
-import { notFound } from 'next/navigation';
-import BookingItem from '../_components/booking-item';
-import { getConfirmedBookings } from '../_data/get-confirmed-bookings';
-import { getConcludedBookings } from '../_data/get-concluded-bookings';
+import { getServerSession } from "next-auth"
+import { authOptions } from "../_lib/auth"
+import { getConfirmedBookings } from "../_data/get-confirmed-bookings"
+import { getConcludedBookings } from "../_data/get-concluded-bookings"
+// import BookingsClient from "../_components/booking-client"
+import { BookingsClient } from "../_components/bookings/index"
+export const dynamic = "force-dynamic"
 
 const Bookings = async () => {
   const session = await getServerSession(authOptions)
-  if(!session?.user) {
-    //TODO mostrar pop-up de login
-    return notFound()
+
+  if (!session?.user) {
+    return <p>Usuário não autenticado.</p>
   }
-  const confirmedBookings = await getConfirmedBookings()
 
-  const concludedBookings = await getConcludedBookings()
+  const userId = (session.user as any).id // Pega o ID do usuário autenticado
 
-  return ( 
-    <>
-      <Header />
-      <div className='p-5 space-y-3'>
-        <h1 className='text-bold text-xl'>Agendamentos</h1>
-        {confirmedBookings.length === 0 && concludedBookings.length === 0 && (
-          <p className='text-gray-400'>Você não tem agendamentos.</p>
-        )}
-        {confirmedBookings.length > 0 && (
-          <>
-            <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
-              Confirmados
-            </h2>
-            {confirmedBookings.map(booking => (
-              <BookingItem 
-                key={booking.id} 
-                booking={JSON.parse(JSON.stringify(booking))}
-              />
-            ))}
-          </>
-        )}
+  try {
+    const [confirmed, concluded] = await Promise.all([
+      getConfirmedBookings(userId).catch(() => []),
+      getConcludedBookings(userId).catch(() => []), // Corrigido: estava getConfirmedBookings
+    ])
 
-        {concludedBookings.length > 0 && (
-          <>
-            <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
-             Finalizados
-            </h2>
-            {concludedBookings.map(booking => (
-             <BookingItem 
-              key={booking.id} 
-              booking={JSON.parse(JSON.stringify(booking))}
-            />
-            ))}
-          </>
-        )}
+    console.log("Confirmed:", confirmed) // Debug
+    console.log("Concluded:", concluded) // Debug
+
+    return (
+      <BookingsClient
+        confirmedBookings={confirmed}
+        concludedBookings={concluded}
+      />
+    )
+  } catch (error) {
+    console.error("Booking load error:", error)
+    console.error("Booking load error:", error)
+    return (
+      <div className="p-5">
+        <p className="text-red-500">Erro ao carregar agendamentos</p>
+        <pre className="text-xs">{JSON.stringify(error, null, 2)}</pre>
       </div>
-    </>
-   );
+    )
+  }
 }
- 
-export default Bookings;
+
+export default Bookings

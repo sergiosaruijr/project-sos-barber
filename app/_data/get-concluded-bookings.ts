@@ -1,28 +1,31 @@
 "use server"
 
-import { getServerSession } from 'next-auth'
-import { db } from '../_lib/prisma'
-import { authOptions } from '../_lib/auth'
+import { db } from "../_lib/prisma"
+import { serializeBooking } from "../_lib/serialize"
 
+export const getConcludedBookings = async (userId: string) => {
+  if (!userId) return []
 
-export const getConcludedBookings= async () => {
-  const session = await getServerSession(authOptions)
-  if(!session?.user) {
+  const now = new Date()
+  try {
+    const bookings = await db.booking.findMany({
+      where: {
+        userId,
+        date: { lt: now },
+      },
+      include: {
+        service: {
+          include: {
+            barbershop: true,
+          },
+        },
+      },
+      orderBy: { date: "asc" },
+    })
+
+    return bookings.map((booking) => serializeBooking(booking))
+  } catch (error) {
+    console.error("Failed to fetch concluded bookings:", error)
     return []
   }
-  return db.booking.findMany({
-    where: {
-      userId: (session.user as any).id,
-      date: {
-        lt: new Date(),
-      }
-    },
-    include: {
-      service: {
-        include: {
-          barbershop: true,
-        }
-      },
-    }
-  })
 }

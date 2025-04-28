@@ -34,6 +34,9 @@
 
     --radius: 0.5rem;
   }
+  .debug-border * {
+    outline: 1px solid cyan !important;
+  }
 }
 
 @layer base {
@@ -51,5 +54,21 @@
 @media (max-width: 1027px) {
   .force-col {
     flex-direction: column !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg-force-block {
+    display: block !important;
+  }
+
+  .lg-force-flex {
+    display: flex !important;
+  }
+}
+
+@layer utilities {
+  .lg-force-block {
+    display: block !important;
   }
 }

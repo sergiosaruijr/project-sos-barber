@@ -4,8 +4,14 @@ import "./globals.css"
 import { Toaster } from "sonner"
 import AuthProvider from "./_providers/auth"
 import { Footer } from "./_components/footer"
+import { Nunito } from "next/font/google"
 
 const inter = Inter({ subsets: ["latin"] })
+
+export const nunito = Nunito({
+  weight: ["300", "400", "600", "700"],
+  subsets: ["latin"],
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={inter.className}>
+      <body className={`${nunito.className} ${inter.className}`}>
         <AuthProvider>
           <div className="flex h-full flex-col">
             <div className="flex-1">{children}</div>

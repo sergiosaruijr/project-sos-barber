@@ -4,7 +4,6 @@ import Image from "next/image"
 import { db } from "./_lib/prisma"
 import BarbershopItem from "./_components/barbershop-item"
 import { quickSearchOptions } from "./_constants/search"
-import BookingItem from "./_components/booking-item"
 import Search from "./_components/search"
 import Link from "next/link"
 import { getServerSession } from "next-auth"
@@ -12,6 +11,7 @@ import { authOptions } from "./_lib/auth"
 import { ptBR } from "date-fns/locale"
 import { format } from "date-fns"
 import { getConfirmedBookings } from "./_data/get-confirmed-bookings"
+import BookingItem from "./_components/bookings/booking-item"
 
 //TODO: receber agendamento como prop
 const Home = async () => {
@@ -23,7 +23,12 @@ const Home = async () => {
     },
   })
 
-  const confirmedBookings = await getConfirmedBookings()
+  if (!session?.user) {
+    return <p>Usuário não autenticado.</p>
+  }
+
+  const userId = (session.user as any).id
+  const confirmedBookings = await getConfirmedBookings(userId)
 
   return (
     <div>
