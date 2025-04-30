@@ -1,6 +1,6 @@
 export type Booking = {
   id: string
-  date: string // ou Date, dependendo do banco
+  date: string
   service: {
     id: string
     name: string

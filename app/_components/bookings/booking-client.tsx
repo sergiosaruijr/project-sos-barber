@@ -6,7 +6,6 @@ import { useMediaQuery } from "@/app/_hooks/use-media-query"
 import { BookingDetails, BookingSheet, BookingCard } from "./index"
 import Header from "../header"
 
-// eslint-disable-next-line no-unused-vars
 const BookingsClient = ({
   confirmedBookings,
   concludedBookings,
@@ -44,7 +43,7 @@ const BookingsClient = ({
           )}
         </div>
 
-        {/* Coluna direta (apenas desktop) */}
+        {/* Coluna direta*/}
         {!isMobile && (
           <div className="w-full lg:sticky lg:top-4 lg:h-fit lg:w-1/2">
             {selectedBooking ? (

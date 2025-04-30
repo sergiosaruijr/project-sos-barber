@@ -1,20 +1,28 @@
 import { Prisma } from "@prisma/client"
+import { BookingWithDetails } from "../_components/bookings/types"
 
 export type SerializedBooking = {
   id: string
-  date: string // ISO string
+  userId: string
+  serviceId: string
+  date: string
+  createdAt: string
+  updatedAt: string
   service: {
     id: string
     name: string
     description: string
     imageUrl: string
-    price: string // Convertido para string
+    price: string
     barbershop: {
       id: string
       name: string
       address: string
       imageUrl: string
       phones: string[]
+      createdAt: string
+      updatedAt: string
+      description?: string
     }
   }
 }
@@ -24,20 +32,39 @@ export const serializeBooking = (
     include: { service: { include: { barbershop: true } } }
   }>,
 ): SerializedBooking => ({
-  id: booking.id,
+  ...booking,
   date: booking.date.toISOString(),
+  createdAt: booking.createdAt.toISOString(),
+  updatedAt: booking.updatedAt.toISOString(),
   service: {
-    id: booking.service.id,
-    name: booking.service.name,
-    description: booking.service.description,
-    imageUrl: booking.service.imageUrl,
+    ...booking.service,
     price: booking.service.price.toString(),
     barbershop: {
-      id: booking.service.barbershop.id,
-      name: booking.service.barbershop.name,
-      address: booking.service.barbershop.address,
-      imageUrl: booking.service.barbershop.imageUrl,
+      ...booking.service.barbershop,
+      createdAt: booking.service.barbershop.createdAt.toISOString(),
+      updatedAt: booking.service.barbershop.updatedAt.toISOString(),
       phones: booking.service.barbershop.phones || [],
+      description: booking.service.barbershop.description || undefined,
+    },
+  },
+})
+
+export const deserializeBooking = (
+  serialized: SerializedBooking,
+): BookingWithDetails => ({
+  ...serialized,
+  date: new Date(serialized.date),
+  createdAt: new Date(serialized.createdAt),
+  updatedAt: new Date(serialized.updatedAt),
+  service: {
+    ...serialized.service,
+    price: new Prisma.Decimal(serialized.service.price),
+    barbershopId: serialized.service.barbershop.id,
+    barbershop: {
+      ...serialized.service.barbershop,
+      description: serialized.service.barbershop.description || "",
+      createdAt: new Date(serialized.service.barbershop.createdAt),
+      updatedAt: new Date(serialized.service.barbershop.updatedAt),
     },
   },
 })

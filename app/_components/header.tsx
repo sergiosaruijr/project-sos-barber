@@ -66,7 +66,6 @@ const Header = () => {
                   className="flex cursor-pointer items-center gap-2 hover:text-gray-400"
                 >
                   <div className="rounded-full bg-gray-800 p-1">
-                    {/* Avatar redondo com imagem do usuário */}
                     <Avatar>
                       <AvatarImage
                         src={session.user.image ?? "/default-avatar.png"}
@@ -80,8 +79,6 @@ const Header = () => {
                 </div>
               </div>
             )}
-
-            {/* Agendamentos só aparece se o usuário estiver logado */}
           </div>
 
           <div className="md:hidden">

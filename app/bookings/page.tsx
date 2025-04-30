@@ -2,8 +2,8 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "../_lib/auth"
 import { getConfirmedBookings } from "../_data/get-confirmed-bookings"
 import { getConcludedBookings } from "../_data/get-concluded-bookings"
-// import BookingsClient from "../_components/booking-client"
 import { BookingsClient } from "../_components/bookings/index"
+import { deserializeBooking } from "../_lib/serialize"
 export const dynamic = "force-dynamic"
 
 const Bookings = async () => {
@@ -17,8 +17,12 @@ const Bookings = async () => {
 
   try {
     const [confirmed, concluded] = await Promise.all([
-      getConfirmedBookings(userId).catch(() => []),
-      getConcludedBookings(userId).catch(() => []), // Corrigido: estava getConfirmedBookings
+      getConfirmedBookings(userId)
+        .then((bookings) => bookings.map(deserializeBooking))
+        .catch(() => []),
+      getConcludedBookings(userId)
+        .then((bookings) => bookings.map(deserializeBooking))
+        .catch(() => []),
     ])
 
     console.log("Confirmed:", confirmed) // Debug

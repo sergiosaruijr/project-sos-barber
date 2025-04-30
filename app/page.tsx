@@ -23,12 +23,12 @@ const Home = async () => {
     },
   })
 
-  if (!session?.user) {
-    return <p>Usuário não autenticado.</p>
-  }
+  // if (!session?.user) {
+  //   return <p>Usuário não autenticado.</p>
+  // }
 
-  const userId = (session.user as any).id
-  const confirmedBookings = await getConfirmedBookings(userId)
+  const userId = (session?.user as any)?.id
+  const confirmedBookings = userId ? await getConfirmedBookings(userId) : []
 
   return (
     <div>
