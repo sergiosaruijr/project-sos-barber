@@ -19,9 +19,11 @@ const BookingsClient = ({
   return (
     <div>
       <Header />
-      <div className="flex flex-col gap-4 lg:flex-row">
+      <div className="flex flex-col gap-4 lg:flex-row lg:gap-10 lg:px-36 lg:pb-24">
         {/* Coluna esquerda */}
-        <div className="w-full space-y-3 lg:w-1/2">
+        <div className="w-full space-y-3 px-5 pt-10 lg:w-1/2">
+          <h1 className="text-2xl font-bold">Agendamentos</h1>
+          <p className="pt-4 text-xs text-gray-400">CONFIRMADOS</p>
           {confirmedBookings.map((booking) =>
             isMobile ? (
               <BookingSheet key={booking.id} booking={booking} />
@@ -32,6 +34,7 @@ const BookingsClient = ({
             ),
           )}
 
+          <p className="pt-5 text-xs text-gray-400">FINALIZADOS</p>
           {concludedBookings.map((booking) =>
             isMobile ? (
               <BookingSheet key={booking.id} booking={booking} />
@@ -45,7 +48,7 @@ const BookingsClient = ({
 
         {/* Coluna direta*/}
         {!isMobile && (
-          <div className="w-full lg:sticky lg:top-4 lg:h-fit lg:w-1/2">
+          <div className="w-full lg:sticky lg:top-4 lg:h-fit lg:w-1/2 lg:pt-10">
             {selectedBooking ? (
               <BookingDetails booking={selectedBooking} />
             ) : (

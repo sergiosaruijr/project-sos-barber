@@ -26,7 +26,14 @@ const BookingCard = ({
     >
       <CardContent className="flex justify-between p-0">
         <div className="flex flex-col gap-2 py-5 pl-5">
-          <Badge variant={isConfirmed ? "default" : "secondary"}>
+          <Badge
+            variant={isConfirmed ? "default" : "secondary"}
+            className={cn(
+              "w-fit",
+              "text-xs",
+              isConfirmed && "bg-purple-950 text-purple-300",
+            )}
+          >
             {isConfirmed ? "Confirmado" : "Finalizado"}
           </Badge>
           <h3 className="font-semibold">{booking.service.name}</h3>
@@ -37,7 +44,7 @@ const BookingCard = ({
             <p className="text-sm">{booking.service.barbershop.name}</p>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center border-l px-5">
+        <div className="flex min-w-24 flex-col items-center justify-center border-l px-5 text-center">
           <p className="text-sm capitalize">
             {format(booking.date, "MMMM", { locale: ptBR })}
           </p>

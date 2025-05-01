@@ -35,7 +35,7 @@ const Header = () => {
   return (
     <>
       <Card>
-        <CardContent className="flex flex-row items-center justify-between p-5">
+        <CardContent className="flex flex-row items-center justify-between p-5 lg:px-8">
           <Link href="/">
             <Image alt="SOS Barber" src="/logo.png" height={18} width={120} />
           </Link>
