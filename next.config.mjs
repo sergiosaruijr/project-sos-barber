@@ -3,10 +3,13 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: 'utfs.io',
-      }
-    ]
-  }
-};
+        hostname: "utfs.io",
+      },
+    ],
+  },
+  experimental: {
+    serverComponentsExternalPackages: ["@prisma/client"],
+  },
+}
 
-export default nextConfig;
+export default nextConfig

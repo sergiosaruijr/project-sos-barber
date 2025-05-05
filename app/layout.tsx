@@ -5,6 +5,7 @@ import { Toaster } from "sonner"
 import AuthProvider from "./_providers/auth"
 import { Footer } from "./_components/footer"
 import { Nunito } from "next/font/google"
+import { KeepAliveTrigger } from "./_components/keep-alive-trigger"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -28,7 +29,10 @@ export default function RootLayout({
       <body className={`${nunito.className} ${inter.className}`}>
         <AuthProvider>
           <div className="flex h-full flex-col">
-            <div className="flex-1">{children}</div>
+            <div className="flex-1">
+              <KeepAliveTrigger />
+              {children}
+            </div>
             <Footer />
           </div>
         </AuthProvider>
