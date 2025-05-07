@@ -36,9 +36,9 @@ const Home = async () => {
       <Header />
       <div className="p-5">
         {/* Div com imagem de fundo */}
-        <div className="-mx-5 gap-8 p-8 md:flex md:bg-black">
+        <div className="-mx-5 w-full gap-8 p-8 md:flex md:bg-black">
           {/* Div lado esquerdo */}
-          <div className="flex flex-[1] flex-col justify-between">
+          <div className="flex min-w-0 flex-[1] flex-col justify-between">
             <h2 className="text-xl font-bold">
               Olá, {session?.user ? session.user.name : "bem vindo"}
             </h2>
@@ -103,7 +103,7 @@ const Home = async () => {
           </div>
 
           {/* Lado Direito (Carrossel) */}
-          <div className="relative hidden flex-[2] overflow-hidden md:block">
+          <div className="relative hidden min-w-0 overflow-hidden md:block md:flex-1">
             <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
               Recomendados
             </h2>

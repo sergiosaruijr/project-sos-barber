@@ -90,7 +90,7 @@ const BookingDetails = ({
           <Badge
             variant={isConfirmed ? "default" : "secondary"}
             className={cn(
-              "w-fit py-5 text-sm",
+              "mb-2 mt-5 w-fit text-sm",
               isConfirmed && "bg-purple-950 text-purple-300",
             )}
           >

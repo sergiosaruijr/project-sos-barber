@@ -9,7 +9,7 @@ import { KeepAliveTrigger } from "./_components/keep-alive-trigger"
 
 const inter = Inter({ subsets: ["latin"] })
 
-export const nunito = Nunito({
+const nunito = Nunito({
   weight: ["300", "400", "600", "700"],
   subsets: ["latin"],
 })
