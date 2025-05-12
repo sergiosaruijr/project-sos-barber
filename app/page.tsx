@@ -47,19 +47,17 @@ const Home = async () => {
           {/* conteúdo da div */}
           <div className="w-full gap-8 overflow-x-hidden md:ml-20 md:mr-20 md:flex md:bg-black md:pb-16 md:pt-16">
             {/* Div lado esquerdo */}
-            <div className="flex min-w-0 flex-[1] flex-col justify-between">
+            <div className="flex min-w-0 flex-[1] flex-col">
               <h2 className="text-xl font-bold md:mb-3">
                 Olá, {session?.user ? session.user.name : "bem vindo"}
               </h2>
-              <p className="text-white md:-mt-8">
+              <p className="text-white">
                 {format(new Date(), "EEEE, dd 'de' MMMM", { locale: ptBR })}
               </p>
-
               {/* Busca */}
-              <div className="mt-6 max-w-2xl">
+              <div className="mt-6 max-w-2xl md:mb-3">
                 <Search />
               </div>
-
               {/* Busca Rapida */}
               <div className="mt-6 flex gap-3 overflow-x-scroll md:hidden [&::-webkit-scrollbar]:hidden">
                 {quickSearchOptions.map((option) => (
@@ -81,7 +79,6 @@ const Home = async () => {
                   </Button>
                 ))}
               </div>
-
               {/* Imagem */}
               <div className="relative mt-6 h-[150px] w-full md:hidden">
                 <Image
@@ -91,11 +88,10 @@ const Home = async () => {
                   className="rounded-xl object-cover"
                 />
               </div>
-
               {/* Agendamento confirmados*/}
               {confirmedBookings.length > 0 && (
                 <>
-                  <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400 md:-mb-2 md:block">
+                  <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400 md:block">
                     Agendamentos
                   </h2>
 
@@ -121,7 +117,7 @@ const Home = async () => {
           </div>
         </div>
 
-        <div className="md:ml-20 md:mr-20">
+        <div className="md:mb-20 md:ml-20 md:mr-20">
           <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
             Mais recentes
           </h2>
