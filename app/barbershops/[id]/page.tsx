@@ -41,7 +41,7 @@ const BarbershopPage = async ({ params }: BarbershopPageProps) => {
       <div className="hidden md:block">
         <Header />
       </div>
-      <div className="grid grid-cols-1 pb-24 md:grid-cols-[2fr_1fr] md:gap-10 md:px-32 md:pt-10">
+      <div className="grid grid-cols-1 pb-24 md:gap-10 md:px-16 md:pt-10 xl:grid-cols-[2fr_1fr] xl:px-32">
         {/* Esquerda */}
         <div className="">
           {/* Imagem */}
@@ -107,7 +107,7 @@ const BarbershopPage = async ({ params }: BarbershopPageProps) => {
             <h2 className="text-xs font-bold uppercase text-gray-400">
               Serviços
             </h2>
-            <div className="grid grid-cols-1 gap-4 border border-red-500 md:grid-cols-1 md:gap-6 lg:grid-cols-2 xl:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               {barbershop.services.map((service) => (
                 <ServiceItem
                   key={service.id}
@@ -127,7 +127,7 @@ const BarbershopPage = async ({ params }: BarbershopPageProps) => {
         </div>
 
         {/* Direita */}
-        <Card className="hidden self-start md:block">
+        <Card className="hidden self-start xl:block">
           <CardContent>
             <div className="relative mt-6 flex h-[180px] w-full items-end">
               <Image
