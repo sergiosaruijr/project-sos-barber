@@ -15,19 +15,23 @@ export const authOptions: AuthOptions = {
           prompt: "consent",
           access_type: "offline",
           response_type: "code",
-          redirect_uri: process.env.NEXTAUTH_URL + "/api/auth/callback/google",
+          redirect_uri:
+            "https://project-sos-barber.vercel.app/api/auth/callback/google", // URL absoluta!
         },
       },
     }),
   ],
-  callbacks: {
-    async session({ session, user }) {
-      session.user = {
-        ...session.user,
-        id: user.id,
-      } as any
-      return session
+  cookies: {
+    sessionToken: {
+      name: "__Secure-next-auth.session-token",
+      options: {
+        domain: ".vercel.app", // Permite subdomínios
+        path: "/",
+        secure: true,
+        sameSite: "lax",
+      },
     },
   },
   secret: process.env.NEXTAUTH_SECRET,
+  debug: true, // Ativa logs detalhados
 }
