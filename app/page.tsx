@@ -36,7 +36,7 @@ const Home = async () => {
 
   const userId = (session?.user as any)?.id
   const confirmedBookings = userId ? await getConfirmedBookings(userId) : []
-
+  console.log("🔥 Sessão no server:", session)
   return (
     <div>
       {/* Header */}
