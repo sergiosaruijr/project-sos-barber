@@ -13,20 +13,13 @@ export const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id
-      }
-      return token
-    },
-    async session({ session, token }) {
+    async session({ session, user }) {
       session.user = {
         ...session.user,
-        id: token.id as string,
+        id: user.id,
       } as any
       return session
     },
   },
   secret: process.env.NEXTAUTH_SECRET,
-  debug: true,
 }

@@ -2,7 +2,6 @@ import Header from "./_components/header"
 import { Button } from "./_components/ui/button"
 import Image from "next/image"
 import { db } from "./_lib/prisma"
-// import BarbershopItem from "./_components/barbershop-item"
 import { quickSearchOptions } from "./_constants/search"
 import Search from "./_components/search"
 import Link from "next/link"
@@ -13,8 +12,8 @@ import { format } from "date-fns"
 import { getConfirmedBookings } from "./_data/get-confirmed-bookings"
 import BookingItem from "./_components/bookings/booking-item"
 import HorizontalCarousel from "./_components/horizontal-carousel"
+import { Key } from "react"
 
-//TODO: receber agendamento como prop
 const Home = async () => {
   const session = await getServerSession(authOptions)
   const barbershops = await db.barbershop.findMany({})
@@ -30,12 +29,10 @@ const Home = async () => {
     },
   })
 
-  // if (!session?.user) {
-  //   return <p>Usuário não autenticado.</p>
-  // }
-
   const userId = (session?.user as any)?.id
   const confirmedBookings = userId ? await getConfirmedBookings(userId) : []
+
+  console.log("🔥 Confirmed bookings:", confirmedBookings)
   console.log("🔥 Sessão no server:", session)
   return (
     <div>
@@ -94,15 +91,29 @@ const Home = async () => {
                   <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400 md:block">
                     Agendamentos
                   </h2>
+                  {confirmedBookings.length > 0 ? (
+                    <div className="flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+                      {confirmedBookings.map(
+                        (booking: { id: Key | null | undefined }) => (
+                          <BookingItem
+                            key={booking.id}
+                            booking={JSON.parse(JSON.stringify(booking))}
+                          />
+                        ),
+                      )}
+                    </div>
+                  ) : (
+                    <p>Não há agendamentos confirmados.</p>
+                  )}
 
-                  <div className="flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+                  {/* <div className="flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
                     {confirmedBookings.map((booking) => (
                       <BookingItem
                         key={booking.id}
                         booking={JSON.parse(JSON.stringify(booking))}
                       />
                     ))}
-                  </div>
+                  </div> */}
                 </>
               )}
             </div>

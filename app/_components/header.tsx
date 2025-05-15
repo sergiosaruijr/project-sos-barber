@@ -31,7 +31,7 @@ const Header = () => {
   // const handleSignOut = () => {
   //   signOut({ callbackUrl: "/" }) // Redireciona para a página inicial após o logout
   // }
-
+  console.log("🔥Sessão retornada:", session)
   return (
     <>
       <Card>
