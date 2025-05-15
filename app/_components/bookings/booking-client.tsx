@@ -33,6 +33,11 @@ const BookingsClient = ({
               </div>
             ),
           )}
+          {confirmedBookings.length === 0 && (
+            <p className="text-sm text-gray-200">
+              Não há agendamentos confirmados.
+            </p>
+          )}
 
           <p className="pt-5 text-xs text-gray-400">FINALIZADOS</p>
           {concludedBookings.map((booking) =>
@@ -43,6 +48,11 @@ const BookingsClient = ({
                 <BookingCard booking={booking} />
               </div>
             ),
+          )}
+          {concludedBookings.length === 0 && (
+            <p className="text-sm text-gray-200">
+              Não há agendamentos finalizados.
+            </p>
           )}
         </div>
 

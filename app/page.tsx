@@ -13,6 +13,7 @@ import { getConfirmedBookings } from "./_data/get-confirmed-bookings"
 import BookingItem from "./_components/bookings/booking-item"
 import HorizontalCarousel from "./_components/horizontal-carousel"
 import { Key } from "react"
+import { BannerImage } from "./_components/banner-image"
 
 const Home = async () => {
   const session = await getServerSession(authOptions)
@@ -31,6 +32,8 @@ const Home = async () => {
 
   const userId = (session?.user as any)?.id
   const confirmedBookings = userId ? await getConfirmedBookings(userId) : []
+  const showDefaultBanner = !session?.user || confirmedBookings.length <= 0
+  const showMobileBanner = confirmedBookings.length > 0
 
   console.log("🔥 Confirmed bookings:", confirmedBookings)
   console.log("🔥 Sessão no server:", session)
@@ -45,14 +48,14 @@ const Home = async () => {
           <div className="w-full gap-8 overflow-x-hidden md:ml-20 md:mr-20 md:flex md:bg-black md:pb-16 md:pt-16">
             {/* Div lado esquerdo */}
             <div className="flex min-w-0 flex-[1] flex-col">
-              <h2 className="text-xl font-bold md:mb-3">
+              <h2 className="text-xl font-bold md:mb-0.5">
                 Olá, {session?.user ? session.user.name : "bem vindo"}
               </h2>
               <p className="text-white">
                 {format(new Date(), "EEEE, dd 'de' MMMM", { locale: ptBR })}
               </p>
               {/* Busca */}
-              <div className="mt-6 max-w-2xl md:mb-3">
+              <div className="mt-6 max-w-2xl md:mb-5">
                 <Search />
               </div>
               {/* Busca Rapida */}
@@ -77,14 +80,9 @@ const Home = async () => {
                 ))}
               </div>
               {/* Imagem */}
-              <div className="relative mt-6 h-[150px] w-full md:hidden">
-                <Image
-                  src="/banner01.svg"
-                  alt="Agende nos melhores com SOS Barber"
-                  fill
-                  className="rounded-xl object-cover"
-                />
-              </div>
+              {showDefaultBanner && <BannerImage />}
+              {showMobileBanner && <BannerImage className="md:hidden" />}
+
               {/* Agendamento confirmados*/}
               {confirmedBookings.length > 0 && (
                 <>
@@ -105,15 +103,6 @@ const Home = async () => {
                   ) : (
                     <p>Não há agendamentos confirmados.</p>
                   )}
-
-                  {/* <div className="flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
-                    {confirmedBookings.map((booking) => (
-                      <BookingItem
-                        key={booking.id}
-                        booking={JSON.parse(JSON.stringify(booking))}
-                      />
-                    ))}
-                  </div> */}
                 </>
               )}
             </div>

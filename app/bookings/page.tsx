@@ -13,7 +13,7 @@ const Bookings = async () => {
     return <p>Usuário não autenticado.</p>
   }
 
-  const userId = (session.user as any).id // Pega o ID do usuário autenticado
+  const userId = (session.user as any).id
 
   try {
     const [confirmed, concluded] = await Promise.all([
@@ -24,9 +24,6 @@ const Bookings = async () => {
         .then((bookings) => bookings.map(deserializeBooking))
         .catch(() => []),
     ])
-
-    console.log("Confirmed:", confirmed) // Debug
-    console.log("Concluded:", concluded) // Debug
 
     return (
       <BookingsClient

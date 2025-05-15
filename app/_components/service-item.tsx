@@ -157,10 +157,6 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
     }
   }
 
-  // const generateDayTimeList = () => {
-
-  // }
-
   const timeList = useMemo(() => {
     if (!selectedDay) return []
     return getTimeList({
@@ -171,8 +167,7 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
 
   return (
     <>
-      <Card className="bg-blue-200">
-        {/* <CardContent className="force-col flex items-center gap-3 p-3 max-[1027px]:flex-col"> */}
+      <Card>
         <CardContent className="flex items-center gap-3 p-3">
           {/* Imagem */}
           <div className="relative max-h-[110px] min-h-[110px] min-w-[110px] max-w-[110px]">

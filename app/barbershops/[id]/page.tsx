@@ -43,7 +43,7 @@ const BarbershopPage = async ({ params }: BarbershopPageProps) => {
       </div>
       <div className="grid grid-cols-1 pb-24 md:gap-10 md:px-16 md:pt-10 xl:grid-cols-[2fr_1fr] xl:px-32">
         {/* Esquerda */}
-        <div className="">
+        <div>
           {/* Imagem */}
           <div className="relative h-[250px] w-full md:h-[487px]">
             <Image
@@ -151,13 +151,6 @@ const BarbershopPage = async ({ params }: BarbershopPageProps) => {
             </div>
 
             <div className="mt-6">
-              {/* <div className="mb-3 mt-6">
-                <BookingSummary
-                  barbershop={barbershop}
-                  service={booking.service}
-                  selectedDate={booking.date}
-                />
-              </div> */}
               <div className="space-y-3 border-b border-solid pb-5">
                 <h2 className="text-sm font-bold uppercase text-gray-200">
                   Sobre nós
