@@ -73,7 +73,7 @@ const BookingDetails = ({
         </p>
       </div>
 
-      <div className="space-y-3 border-b border-solid py-5">
+      <div className="space-y-3 border-b border-solid pb-5 md:py-5">
         <h4 className="text-sm font-bold">Contato</h4>
         {booking.service.barbershop.phones.map((phone, index) => (
           <PhoneItem key={index} phone={phone} />
@@ -83,7 +83,7 @@ const BookingDetails = ({
       <Badge
         variant={isConfirmed ? "default" : "secondary"}
         className={cn(
-          "mb-2 mt-5 w-fit text-sm",
+          "mb-2 mt-5 w-fit text-sm md:mb-3",
           isConfirmed && "bg-purple-950 text-purple-300",
         )}
       >
