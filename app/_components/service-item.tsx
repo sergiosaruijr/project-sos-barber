@@ -24,6 +24,8 @@ import { Dialog, DialogContent } from "./ui/dialog"
 // import BookingSummary from "./booking-summary"
 import { useRouter } from "next/navigation"
 import { BookingSummary } from "../_components/bookings/index"
+import { useMediaQuery } from "../_hooks/use-media-query"
+import { Check } from "lucide-react"
 interface ServiceItemProps {
   service: BarbershopService
   barbershop: Pick<Barbershop, "name" | "address">
@@ -93,6 +95,9 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
 
   const [dayBookings, setDayBookings] = useState<Booking[]>([])
   const [bookingSheetIsOpen, setBookingSheetIsOpen] = useState(false)
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false)
+
+  const isMobile = useMediaQuery("(max-width: 1024px)")
 
   useEffect(() => {
     const fetch = async () => {
@@ -144,19 +149,23 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
         serviceId: service.id,
         date: selectedDate,
       })
+
       handleBookingSheetOpenChange()
-      toast.success("Reserva criada com sucesso!", {
-        action: {
-          label: "Ver Agendamentos",
-          onClick: () => router.push("/bookings"),
-        },
-      })
+
+      if (isMobile) {
+        toast.success("Reserva criada com sucesso!", {
+          action: {
+            label: "Ver Agendamentos",
+            onClick: () => router.push("/bookings"),
+          },
+        })
+      } else {
+        setShowSuccessDialog(true)
+      }
     } catch (error) {
-      // console.log(error)
       toast.error("Erro ao criar reserva!")
     }
   }
-
   const timeList = useMemo(() => {
     if (!selectedDay) return []
     return getTimeList({
@@ -303,6 +312,34 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
           <SignInDialog />
         </DialogContent>
       </Dialog>
+
+      {!isMobile && showSuccessDialog && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="flex w-[300px] max-w-md flex-col items-center rounded-xl bg-zinc-900 p-6 text-center shadow-xl">
+            <div className="my-5 flex h-20 w-20 items-center justify-center rounded-full bg-violet-500">
+              <Check className="h-8 w-8 text-black" strokeWidth={3} />
+            </div>
+            <h2 className="mb-1 text-xl font-semibold">Reserva Efetuada!</h2>
+            <p className="mb-5 text-base text-gray-500">
+              Sua reserva foi agendada com sucesso.
+            </p>
+            <div className="flex w-full flex-col gap-4">
+              <Button
+                className="bg-zinc-700 font-bold hover:bg-zinc-800"
+                onClick={() => router.push("/bookings")}
+              >
+                Ver Agendamentos
+              </Button>
+              <Button
+                className="bg-zinc-700 font-bold hover:bg-zinc-800"
+                onClick={() => setShowSuccessDialog(false)}
+              >
+                Fechar
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }
