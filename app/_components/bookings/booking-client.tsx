@@ -50,7 +50,7 @@ const BookingsClient = ({
             ),
           )}
           {concludedBookings.length === 0 && (
-            <p className="text-sm text-gray-200">
+            <p className="mb-5 text-sm text-gray-200">
               Não há agendamentos finalizados.
             </p>
           )}
