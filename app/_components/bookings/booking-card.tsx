@@ -20,7 +20,7 @@ const BookingCard = ({
     <Card
       onClick={onClick}
       className={cn(
-        variant === "list" && "cursor-pointer hover:bg-gray-700",
+        variant === "list" && "cursor-pointer hover:bg-zinc-700",
         className,
       )}
     >
