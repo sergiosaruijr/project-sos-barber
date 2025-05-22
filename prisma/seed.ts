@@ -1,20 +1,23 @@
-const { PrismaClient } = require("@prisma/client");
+const { PrismaClient } = require("@prisma/client")
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 
 async function seedDatabase() {
   try {
+    await prisma.barbershopService.deleteMany({})
+    await prisma.barbershop.deleteMany({})
+
     const images = [
-      "https://utfs.io/f/c97a2dc9-cf62-468b-a851-bfd2bdde775f-16p.png",
-      "https://utfs.io/f/45331760-899c-4b4b-910e-e00babb6ed81-16q.png",
-      "https://utfs.io/f/5832df58-cfd7-4b3f-b102-42b7e150ced2-16r.png",
-      "https://utfs.io/f/7e309eaa-d722-465b-b8b6-76217404a3d3-16s.png",
-      "https://utfs.io/f/178da6b6-6f9a-424a-be9d-a2feb476eb36-16t.png",
-      "https://utfs.io/f/2f9278ba-3975-4026-af46-64af78864494-16u.png",
-      "https://utfs.io/f/988646ea-dcb6-4f47-8a03-8d4586b7bc21-16v.png",
-      "https://utfs.io/f/60f24f5c-9ed3-40ba-8c92-0cd1dcd043f9-16w.png",
-      "https://utfs.io/f/f64f1bd4-59ce-4ee3-972d-2399937eeafc-16x.png",
-      "https://utfs.io/f/e995db6d-df96-4658-99f5-11132fd931e1-17j.png",
+      "https://images.unsplash.com/photo-1592647420148-bfcc177e2117?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1533245270348-821d4d5c7514?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //teste
+      "https://images.unsplash.com/photo-1517832606299-7ae9b720a186?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1661849817260-55bfa0927e4d?q=80&w=1336&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1628274459813-74bc7e2c53b2?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1638383257653-4217e9161b11?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1633121050918-ab208f1508b7?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1695173122226-3a932002ab33?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1675599194044-0bedc2546a34?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1635273051427-7c2a35ce50ce?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "https://utfs.io/f/3bcf33fc-988a-462b-8b98-b811ee2bbd71-17k.png",
       "https://utfs.io/f/5788be0e-2307-4bb4-b603-d9dd237950a2-17l.png",
       "https://utfs.io/f/6b0888f8-b69f-4be7-a13b-52d1c0c9cab2-17m.png",
@@ -26,9 +29,9 @@ async function seedDatabase() {
       "https://utfs.io/f/9f0847c2-d0b8-4738-a673-34ac2b9506ec-17r.png",
       "https://utfs.io/f/07842cfb-7b30-4fdc-accc-719618dfa1f2-17s.png",
       "https://utfs.io/f/0522fdaf-0357-4213-8f52-1d83c3dcb6cd-18e.png",
-    ];
+    ]
     // Nomes criativos para as barbearias
-    const creativeNames = [
+    const creativeNames: BarbershopName[] = [
       "Barbearia Vintage",
       "Corte & Estilo",
       "Barba & Navalha",
@@ -39,8 +42,31 @@ async function seedDatabase() {
       "Aparência Impecável",
       "Estilo Urbano",
       "Estilo Clássico",
-    ];
-
+    ]
+    //Descrições para barbearias
+    const descriptions = {
+      "Barbearia Vintage":
+        "Especializada em cortes clássicos e atendimento acolhedor, a Barbearia Vintage traz o charme do passado com técnicas tradicionais que nunca saem de moda. Aqui, cada detalhe remete à elegância dos tempos antigos, com cadeiras de couro, decoração retrô e um ambiente pensado para reviver a verdadeira essência da barbearia clássica. Um lugar perfeito para quem busca qualidade aliada à nostalgia.",
+      "Corte & Estilo":
+        "Aqui, estilo e precisão se unem para entregar cortes modernos e personalizados que realçam sua identidade. Nossa equipe está sempre atualizada com as últimas tendências para oferecer desde um corte mais clássico até os visuais mais arrojados, tudo com atendimento dedicado para garantir que você saia satisfeito e confiante.",
+      "Barba & Navalha":
+        "A tradição da barbearia clássica com serviços impecáveis de barbearia para um visual sempre renovado. Utilizamos técnicas manuais com navalha, proporcionando um acabamento perfeito e uma experiência de cuidado que vai além do simples corte, valorizando o estilo e a personalidade de cada cliente.",
+      "The Dapper Den":
+        "Um espaço sofisticado para homens que valorizam elegância e cuidado detalhado. Com um ambiente exclusivo e atendimento personalizado, oferecemos cortes refinados, tratamentos capilares e uma seleção especial de produtos premium para garantir que você esteja sempre no seu melhor.",
+      "Cabelo & Cia.":
+        "Diversidade de serviços para cuidar do seu cabelo com qualidade e estilo. Desde cortes masculinos e femininos até tratamentos especiais, nossa barbearia é um espaço versátil que atende a todos os gostos e necessidades, sempre com profissionais qualificados e equipamentos modernos.",
+      "Machado & Tesoura":
+        "Cortes fortes e marcantes, feitos com técnica e atenção a cada detalhe. Aqui, o foco está em transformar sua imagem com visuais impactantes que refletem atitude e personalidade, seja para um estilo clássico ou contemporâneo, tudo realizado com ferramentas de alta qualidade e paixão pelo ofício.",
+      "Barbearia Elegance":
+        "Ambiente refinado e cortes com design exclusivo para quem busca excelência. Nossa missão é proporcionar uma experiência premium, combinando técnicas avançadas de barbearia com um atendimento impecável, onde cada cliente é tratado com o máximo respeito e cuidado.",
+      "Aparência Impecável":
+        "Serviços que garantem um visual sempre alinhado e impecável para todas as ocasiões. Seja para o dia a dia ou eventos especiais, nossa equipe dedica atenção especial aos detalhes para que você esteja sempre com a aparência perfeita, unindo estilo, conforto e modernidade.",
+      "Estilo Urbano":
+        "Inspiração urbana para cortes modernos, com personalidade e atitude. Aqui, a vibe da cidade se reflete em cortes descolados, designs arrojados e um ambiente jovem, onde a criatividade e a liberdade de expressão são valorizadas para criar visuais autênticos e cheios de estilo.",
+      "Estilo Clássico":
+        "Resgatando o clássico com técnicas tradicionais e um toque de modernidade. Essa barbearia é o lugar ideal para quem valoriza a tradição aliada à inovação, oferecendo cortes que atravessam gerações com elegância, além de um atendimento que faz você se sentir em casa.",
+    } as const
+    type BarbershopName = keyof typeof descriptions
     // Endereços fictícios para as barbearias
     const addresses = [
       "Rua da Barbearia, 123",
@@ -53,7 +79,7 @@ async function seedDatabase() {
       "Praça da Aparência, 505",
       "Rua Urbana, 606",
       "Avenida Clássica, 707",
-    ];
+    ]
 
     const services = [
       {
@@ -98,14 +124,15 @@ async function seedDatabase() {
         imageUrl:
           "https://utfs.io/f/8a457cda-f768-411d-a737-cdb23ca6b9b5-b3pegf.png",
       },
-    ];
+    ]
 
     // Criar 10 barbearias com nomes e endereços fictícios
-    const barbershops = [];
+    const barbershops = []
     for (let i = 0; i < 10; i++) {
-      const name = creativeNames[i];
-      const address = addresses[i];
-      const imageUrl = images[i];
+      const name = creativeNames[i]
+      const address = addresses[i]
+      const imageUrl = images[i]
+      const description = descriptions[name]
 
       const barbershop = await prisma.barbershop.create({
         data: {
@@ -113,10 +140,9 @@ async function seedDatabase() {
           address,
           imageUrl: imageUrl,
           phones: ["(11) 99999-9999", "(11) 99999-9999"],
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac augue ullamcorper, pharetra orci mollis, auctor tellus. Phasellus pharetra erat ac libero efficitur tempus. Donec pretium convallis iaculis. Etiam eu felis sollicitudin, cursus mi vitae, iaculis magna. Nam non erat neque. In hac habitasse platea dictumst. Pellentesque molestie accumsan tellus id laoreet.",
+          description,
         },
-      });
+      })
 
       for (const service of services) {
         await prisma.barbershopService.create({
@@ -131,17 +157,25 @@ async function seedDatabase() {
             },
             imageUrl: service.imageUrl,
           },
-        });
+        })
       }
 
-      barbershops.push(barbershop);
+      barbershops.push(barbershop)
     }
 
     // Fechar a conexão com o banco de dados
-    await prisma.$disconnect();
+    await prisma.$disconnect()
   } catch (error) {
-    console.error("Erro ao criar as barbearias:", error);
+    console.error("Erro ao criar as barbearias:", error)
   }
 }
 
-seedDatabase();
+seedDatabase()
+  .catch((e) => {
+    console.error(e)
+    process.exit(1)
+  })
+  .finally(async () => {
+    await prisma.$disconnect()
+    process.exit(0)
+  })
