@@ -154,7 +154,9 @@ const BookingDetails = ({
   return (
     <div className="">
       {onClose ? (
-        <div className="space-y-4 rounded-xl px-5 pt-5">{renderContent()}</div>
+        <div className="space-y-4 rounded-xl px-1 pt-5 md:px-5">
+          {renderContent()}
+        </div>
       ) : (
         <Card className="space-y-4 rounded-xl">
           <CardContent>{renderContent()}</CardContent>
