@@ -53,7 +53,7 @@ export default function HorizontalCarousel({ items }: HorizontalCarouselProps) {
     <div className="relative">
       {showLeft && (
         <Button
-          className="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/60 p-2"
+          className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/60 p-2"
           onClick={() => scroll("left")}
           size="icon"
         >
@@ -71,7 +71,7 @@ export default function HorizontalCarousel({ items }: HorizontalCarouselProps) {
 
       {showRight && (
         <Button
-          className="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/60 p-2"
+          className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/60 p-2"
           onClick={() => scroll("right")}
           size="icon"
         >
