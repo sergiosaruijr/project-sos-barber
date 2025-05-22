@@ -55,7 +55,7 @@ const Home = async () => {
                 {format(new Date(), "EEEE, dd 'de' MMMM", { locale: ptBR })}
               </p>
               {/* Busca */}
-              <div className="mt-6 max-w-2xl md:mb-5">
+              <div className="mt-6 max-w-4xl md:mb-5">
                 <Search />
               </div>
               {/* Busca Rapida */}
@@ -90,7 +90,7 @@ const Home = async () => {
                     Agendamentos
                   </h2>
                   {confirmedBookings.length > 0 ? (
-                    <div className="flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+                    <div className="flex gap-5 overflow-x-auto [&::-webkit-scrollbar]:hidden">
                       {confirmedBookings.map(
                         (booking: { id: Key | null | undefined }) => (
                           <BookingItem

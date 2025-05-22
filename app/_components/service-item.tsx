@@ -213,7 +213,7 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                   Reservar
                 </Button>
 
-                <SheetContent className="overflow-auto px-0">
+                <SheetContent className="overflow-auto px-0 sm:max-w-sm">
                   <SheetHeader>
                     <SheetTitle className="text-center">
                       Fazer Reserva
@@ -286,12 +286,13 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                       />
                     </div>
                   )}
-                  <SheetFooter className="mt-5 px-5">
+                  <SheetFooter className="mt-5 w-full px-5">
                     {/* <SheetClose asChild> */}
                     <Button
                       type="submit"
                       onClick={handleCreateBooking}
                       disabled={!selectedDay && !selectedTime}
+                      className="w-full"
                     >
                       Confirmar
                     </Button>

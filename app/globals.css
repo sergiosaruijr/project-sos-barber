@@ -43,6 +43,18 @@
   * {
     @apply border-border antialiased;
   }
+  button:focus,
+  input:focus,
+  select:focus,
+  input:focus,
+  input:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+  textarea:focus {
+    outline: none;
+    box-shadow: none;
+  }
   html {
     @apply h-full;
   }
