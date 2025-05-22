@@ -154,7 +154,7 @@ const BookingDetails = ({
   return (
     <div className="">
       {onClose ? (
-        <div className="space-y-4 rounded-xl px-1 pt-5 md:px-5">
+        <div className="space-y-4 rounded-xl px-1 pt-5 lg:px-5">
           {renderContent()}
         </div>
       ) : (
