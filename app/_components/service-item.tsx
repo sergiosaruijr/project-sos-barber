@@ -229,6 +229,9 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                       // fromDate={addDays(new Date(), 1)}
                       fromDate={new Date()}
                       className="mx-auto w-full"
+                      classNames={{
+                        day: "h-9 w-9 p-0 font-normal text-sm aria-selected:opacity-100 bg-transparent text-inherit focus:outline-none focus:ring-0 focus-visible:ring-0 focus:bg-transparent focus:text-inherit",
+                      }}
                       styles={{
                         head_cell: {
                           textTransform: "capitalize",
