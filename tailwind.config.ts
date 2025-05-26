@@ -1,5 +1,7 @@
 import type { Config } from "tailwindcss"
 
+const defaultTheme = require("tailwindcss/defaultTheme")
+
 const config = {
   darkMode: ["class"],
   content: [
@@ -75,6 +77,11 @@ const config = {
       fontFamily: {
         nunito: ["Nunito", "sans-serif"],
       },
+    },
+    screens: {
+      ...defaultTheme.screens,
+      "4lx": "2048px",
+      "5lx": "2560px",
     },
   },
   plugins: [require("tailwindcss-animate")],

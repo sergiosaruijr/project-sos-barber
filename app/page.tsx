@@ -45,7 +45,7 @@ const Home = async () => {
         {/* Div com imagem de fundo */}
         <div className="w-full md:flex md:bg-black">
           {/* conteúdo da div */}
-          <div className="w-full gap-8 overflow-x-hidden md:ml-20 md:mr-20 md:flex md:bg-black md:pb-16 md:pt-16">
+          <div className="w-full gap-8 overflow-x-hidden md:ml-20 md:mr-20 md:flex md:bg-black md:pb-16 md:pt-16 4lx:ml-60 4lx:mr-60 5lx:ml-96 5lx:mr-96">
             {/* Div lado esquerdo */}
             <div className="flex min-w-0 flex-[1] flex-col">
               <h2 className="text-xl font-bold md:mb-0.5">
@@ -117,7 +117,7 @@ const Home = async () => {
           </div>
         </div>
 
-        <div className="md:mb-20 md:ml-20 md:mr-20">
+        <div className="md:mb-20 md:ml-20 md:mr-20 4lx:ml-60 4lx:mr-60 5lx:ml-96 5lx:mr-96">
           <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
             Mais recentes
           </h2>
