@@ -28,8 +28,7 @@
 
 
 <p align="center">
-    <img src="https://github.com/sergiosaruijr/project-sos-barber/blob/main/public/Home.png?raw=true" alt="Home" width="400px">
-
+   <img src="https://github.com/sergiosaruijr/project-sos-barber/blob/master/public/Home.png?raw=true" alt="Home page preview" width="800"/>
 </p>
 
 <h2 id="started">📌 About</h2>
