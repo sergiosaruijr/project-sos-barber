@@ -1,6 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+[LICENSE__BADGE]: https://img.shields.io/github/license/Fernanda-Kipper/Readme-Templates?style=for-the-badge
+[JAVASCRIPT__BADGE]: https://img.shields.io/badge/Javascript-000?style=for-the-badge&logo=javascript
+[TYPESCRIPT__BADGE]: https://img.shields.io/badge/typescript-D4FAFF?style=for-the-badge&logo=typescript
+[REACT__BADGE]: https://img.shields.io/badge/React-005CFE?style=for-the-badge&logo=react
+[PROJECT__BADGE]: https://img.shields.io/badge/📱Visit_this_project-000?style=for-the-badge&logo=project
+[PROJECT__URL]: [https://github.com/sergiosaruijr/project-sos-barber](https://project-sos-barber.vercel.app/)
+[NODE_BADGE]:https://img.shields.io/badge/node.js-20.16.0-43853D?style=for-the-badge&logo=node.js
 
-## Getting Started
+<h1 align="center" style="font-weight: bold;">Project SOS Barber</h1>
+
+![license][LICENSE__BADGE]
+![react][REACT__BADGE]
+![typescript][TYPESCRIPT__BADGE]
+![javascript][JAVASCRIPT__BADGE]
+![node][NODE_BADGE]
+
+<details open="open">
+<summary>Table of Contents</summary>
+ 
+- [📌 About](#started)
+- [🚀 Getting started](#started)
+  - [Prerequisites](#prerequisites)
+  - [Cloning](#cloning)
+  - [Starting](#starting)
+- [📍 Application Routes](#routes)
+  
+</details>
+
+
+<p align="center">
+    <img src="https://github.com/sergiosaruijr/project-sos-barber/blob/main/public/Home.png?raw=true" alt="Home" width="400px">
+
+</p>
+
+<h2 id="started">📌 About</h2>
+
+This is a full-stack project built with Next.js and Node.js, designed to simplify the connection between clients and barbershop professionals. The platform delivers an intuitive and user-friendly experience, allowing users to browse available time slots across different barbershops, select the desired service, and schedule appointments quickly and efficiently.
+
+Users can perform customized searches, filtering barbershops by specific services and ratings to find the best match for their needs. Each barbershop features a dedicated profile page with detailed information about services, prices, and photos — helping clients make well-informed choices.
+
+[![project][PROJECT__BADGE]][PROJECT__URL]
+
+<h2 id="started">🚀 Getting started</h2>
 
 First, run the development server:
 
@@ -16,21 +56,32 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<h3>Prerequisites</h3>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- [NodeJS](https://github.com/)
 
-## Learn More
+<h3>Cloning</h3>
 
-To learn more about Next.js, take a look at the following resources:
+How to clone your project
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+git clone https://github.com/sergiosaruijr/project-sos-barber
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<h3>Starting</h3>
 
-## Deploy on Vercel
+How to start your project
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+cd project-sos-barber
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<h2 id="routes">📍 Application Routes</h2>
+
+Here you can list the main routes of your API, and what are their expected request bodies.
+​
+| route               | description                                          
+|----------------------|-----------------------------------------------------
+| <kbd>/bookings</kbd>     | page that list all bookings
+| <kbd>/barbershops/{id}</kbd>     | profile page with detailed information and booking system.
